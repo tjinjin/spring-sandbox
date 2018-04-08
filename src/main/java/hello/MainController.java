@@ -21,15 +21,20 @@ public class MainController {
         return userRepository.findAll();
     }
 
-    @RequestMapping(method=RequestMethod.PUT)
-    public @ResponseBody String addNewUser (@RequestBody User user){
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
+    @RequestMapping(method=RequestMethod.POST)
+    public @ResponseBody String addNewUser(@RequestBody User user){
 
         userRepository.save(user);
         return "Saved";
     }
 
+    @RequestMapping(method=RequestMethod.PUT, path="{id}")
+    public @ResponseBody User modifyUser(@RequestBody User user,
+                                         @PathVariable Integer id){
+
+        user.setId(id);
+        return userRepository.save(user);
+    }
 
     @RequestMapping(method=RequestMethod.DELETE)
     public @ResponseBody Iterable<User> deleteUser() {
