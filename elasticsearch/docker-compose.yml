@@ -7,6 +7,7 @@ services:
       - "9300:9300"
     volumes:
       - ./es_data/:/usr/share/elasticsearch/data/
+      - ./es_backup/:/tmp/es_backup
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   kibana:
     image: docker.elastic.co/kibana/kibana:6.2.3
